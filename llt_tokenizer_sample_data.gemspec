@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = LltTokenizerSampleData::VERSION
   spec.authors       = ["lichtr"]
   spec.email         = ["robert.lichtensteiner@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{testing Perseus sample data with llt tokenization}
+  spec.summary       = %q{testing Perseus sample data with llt tokenization}
   spec.homepage      = ""
   spec.license       = "MIT"
 

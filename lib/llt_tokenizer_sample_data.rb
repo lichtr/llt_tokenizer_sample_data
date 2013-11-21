@@ -4,13 +4,18 @@ require 'llt'
 
 require 'pry'
 require 'forwardable'
+require 'benchmark_wrapper'
 
 module LltTokenizerSampleData
   class Test
     extend Forwardable
+    extend BenchmarkWrapper
+
+    wrap_with_benchmark :segment, :tokenize
 
     def_delegators :@segmenter, :segment
     def_delegators :@tokenizer, :tokenize
+
 
     def initialize
       @files = TestFiles.new

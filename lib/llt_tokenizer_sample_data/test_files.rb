@@ -26,10 +26,10 @@ module LltTokenizerSampleData
     private
 
     def request_path(arg)
-      if arg.kind_of?(Fixnum)
-        PATHS[arg]
-      else
-        PATHS.find { |p| p.match(/#{arg}/) }
+      case arg
+      when Fixnum then PATHS[arg]
+      when Regexp then PATHS.find { |p| p.match(arg)}
+      when String then PATHS.find { |p| p.match(/#{arg}/) }
       end
     end
   end

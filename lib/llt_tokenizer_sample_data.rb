@@ -11,11 +11,10 @@ module LltTokenizerSampleData
     extend Forwardable
     extend BenchmarkWrapper
 
-    wrap_with_benchmark :segment, :tokenize
-
     def_delegators :@segmenter, :segment
     def_delegators :@tokenizer, :tokenize
 
+    wrap_with_benchmark :segment, :tokenize
 
     def initialize
       @files = TestFiles.new

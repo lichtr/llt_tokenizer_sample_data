@@ -19,6 +19,10 @@ module LltTokenizerSampleData
       end
     end
 
+    def names
+      PATHS.map { |path| File.basename(path) }
+    end
+
     private
 
     def request_path(arg)

@@ -9,8 +9,8 @@ module LltTokenizerSampleData
   class Test
     extend Forwardable
 
-    def_delegators :segmenter, :segment
-    def_delegators :tokenizer, :tokenize
+    def_delegators :@segmenter, :segment
+    def_delegators :@tokenizer, :tokenize
 
     def initialize
       @files = TestFiles.new

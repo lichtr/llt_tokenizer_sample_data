@@ -8,6 +8,7 @@ module LltTokenizerSampleData
 
     # param arg [String] reg exp look up to load a testfile, takes first hit
     # param arg [Fixnum] load a testfile by array index
+    # param arg [Regexp] reg exp look up to load a testfile, takes first hit
     #
     # return [String] the text of a requested file
     def load(arg)

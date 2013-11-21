@@ -29,5 +29,14 @@ module LltTokenizerSampleData
     def run
       binding.pry
     end
+
+    def lookup(expr, sentences)
+      query = Regexp.new(expr) # a regexp, wheter arg == (Regexp || String)
+      indices = sentences.select_indices { |sent| sent.to_s.match(query)}
+      indices.map do |i|
+        surr_ind = [i - 1, i, i + 1]
+        surr_ind.map { |ind| "#{ind}: #{sentences[ind]}" }
+      end
+    end
   end
 end

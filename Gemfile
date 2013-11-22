@@ -5,7 +5,7 @@ gemspec
 gem 'llt',            path: "../llt/llt-core/"
 
 gem 'pg'
-gem 'llt-constants',       path: "../llt/llt-constants"
+gem 'llt-constants',       path: "../latin-language-toolkit/llt-constants"
 gem 'llt-core_extensions', path: "../llt/llt-core_extensions"
 gem 'llt-db_handler',      path: "../llt/llt-db_handler"
 gem 'llt-form_builder',    path: "../llt/llt-form_builder"

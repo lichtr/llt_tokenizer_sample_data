@@ -27,6 +27,8 @@ module LltTokenizerSampleData
     end
 
     def run
+      # Your inside the Test class.
+      # @files, @segmenter and @tokenizer available.
       binding.pry
     end
 

@@ -20,6 +20,12 @@ module LltTokenizerSampleData
       end
     end
 
+    def load_all
+      names.map do |name|
+        load(name)
+      end
+    end
+
     def names
       PATHS.map { |path| File.basename(path) }
     end
@@ -32,6 +38,10 @@ module LltTokenizerSampleData
       when Regexp then PATHS.find { |p| p.match(arg)}
       when String then PATHS.find { |p| p.match(/#{arg}/) }
       end
+    end
+
+    def self.reload!
+      load(__FILE__)
     end
   end
 end

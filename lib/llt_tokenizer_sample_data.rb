@@ -1,6 +1,7 @@
 require "llt_tokenizer_sample_data/version"
 require 'llt_tokenizer_sample_data/test_files'
-require 'llt'
+require 'llt/segmenter'
+require 'llt/tokenizer'
 
 require 'pry'
 require 'forwardable'
@@ -18,12 +19,8 @@ module LltTokenizerSampleData
 
     def initialize
       @files = TestFiles.new
-      @segmenter = services.fetch(:segmenter)
-      @tokenizer = services.fetch(:tokenizer)
-    end
-
-    def services
-      LLT::Service
+      @segmenter = LLT::Segmenter.new
+      @tokenizer = LLT::Tokenizer.new
     end
 
     def run

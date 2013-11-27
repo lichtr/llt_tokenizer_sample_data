@@ -2,13 +2,14 @@ source 'https://rubygems.org'
 
 # Specify your gem's dependencies in llt_tokenizer_sample_data.gemspec
 gemspec
-gem 'llt',            path: "../llt/llt-core/"
 
 gem 'pg'
 gem 'llt-constants',       path: "../latin-language-toolkit/llt-constants"
-gem 'llt-core_extensions', path: "../llt/llt-core_extensions"
-gem 'llt-db_handler',      path: "../llt/llt-db_handler"
-gem 'llt-form_builder',    path: "../llt/llt-form_builder"
-gem 'llt-helpers',         path: "../llt/llt-helpers"
-gem 'llt-logger',          path: "../llt/llt-logger"
-gem 'llt-phonology',       path: "../llt/llt-phonology"
+gem 'llt-core',            path: "../latin-language-toolkit/llt-core"
+gem 'llt-core_extensions', path: "../latin-language-toolkit/llt-core_extensions"
+gem 'llt-db_handler',      path: "../latin-language-toolkit/llt-db_handler"
+gem 'llt-form_builder',    path: "../latin-language-toolkit/llt-form_builder"
+gem 'llt-helpers',         path: "../latin-language-toolkit/llt-helpers"
+gem 'llt-logger',          path: "../latin-language-toolkit/llt-logger"
+gem 'llt-segmenter',       path: "../latin-language-toolkit/llt-segmenter"
+gem 'llt-tokenizer',       path: "../latin-language-toolkit/llt-tokenizer"

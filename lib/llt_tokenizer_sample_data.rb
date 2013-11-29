@@ -49,14 +49,15 @@ module LltTokenizerSampleData
       end
     end
 
-    def to_xml(arg, output = true)
+    def to_xml(arg, output = true, args: { recursive: true, indexing: true, inline: true})
       if arg.kind_of?(Array)
-        arg.each { |e| to_xml(e, output) }
+        arg.each { |e| to_xml(e, output, args: args) }
         nil # don't return the arr
       else
         # Ox is only used for indentation...
-        xml = arg.to_xml(recursive: true, indexing: true)
+        xml = arg.to_xml(args)
         if output
+          xml = "<doc>#{xml}</doc>"
           doc = Ox.parse(xml)
           puts '-----------------'
           puts arg

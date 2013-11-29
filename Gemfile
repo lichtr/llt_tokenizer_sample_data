@@ -4,7 +4,15 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'ox'
-gem 'pg'
+
+platform :ruby do
+  gem 'pg'
+end
+
+platform :jruby do
+  gem 'activerecord-jdbcpostgresql-adapter'
+end
+
 gem 'llt-constants',       path: "../latin-language-toolkit/llt-constants"
 gem 'llt-core',            path: "../latin-language-toolkit/llt-core"
 gem 'llt-core_extensions', path: "../latin-language-toolkit/llt-core_extensions"

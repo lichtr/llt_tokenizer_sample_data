@@ -29,6 +29,14 @@ module LltTokenizerSampleData
       binding.pry
     end
 
+    def segtok(arg)
+      txt = arg.kind_of?(Fixnum) ? @files.load(arg) : arg
+      sentences = segment(txt)
+      sentences.each do |sentence|
+        tokenize(sentence.to_s, add_to: sentence)
+      end
+    end
+
     def lookup(expr, sentences)
       query = Regexp.new(expr) # a regexp, wheter arg == (Regexp || String)
       indices = sentences.select_indices { |sent| sent.to_s.match(query)}

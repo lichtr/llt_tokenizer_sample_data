@@ -21,7 +21,7 @@ module LltTokenizerSampleData
     def initialize
       @files = TestFiles.new
       @segmenter = LLT::Segmenter.new
-      @tokenizer = LLT::Tokenizer.new
+      @tokenizer = LLT::Tokenizer.new(indexing: true)
     end
 
     def run
@@ -55,7 +55,7 @@ module LltTokenizerSampleData
         nil # don't return the arr
       else
         # Ox is only used for indentation...
-        xml = arg.to_xml(recursive: true)
+        xml = arg.to_xml(recursive: true, indexing: true)
         if output
           doc = Ox.parse(xml)
           puts '-----------------'

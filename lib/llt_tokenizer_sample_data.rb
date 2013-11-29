@@ -3,11 +3,12 @@ require 'llt_tokenizer_sample_data/test_files'
 require 'llt/logger'
 require 'llt/segmenter'
 require 'llt/tokenizer'
+require 'parallel'
 
 require 'pry'
 require 'forwardable'
 require 'benchmark_wrapper'
-require 'ox'
+require 'ox' unless ENV['RUBY_VERSION'] =~ /jruby/
 
 module LltTokenizerSampleData
   class Test
@@ -27,6 +28,17 @@ module LltTokenizerSampleData
       # Your inside the Test class.
       # @files, @segmenter and @tokenizer available.
       binding.pry
+    end
+
+    def par_tok(sent)
+      t = Time.now
+      x = Parallel.each(sent, in_threads: 4) do |s|
+        StemDatabase::Db.connection_pool.with_connection do
+          LLT::Tokenizer.new(@tokenizer.default_options).tokenize(s.to_s, add_to: s)
+        end
+      end
+      puts Time.now - t
+      x
     end
 
     def segtok(arg)

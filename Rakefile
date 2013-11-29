@@ -3,4 +3,9 @@ require "rspec/core/rake_task"
 
 RSpec::Core::RakeTask.new(:spec)
 
-task :default => :spec
+desc 'Runs the main script'
+task :run do
+  ruby "script/run.rb"
+end
+
+task :default => :run

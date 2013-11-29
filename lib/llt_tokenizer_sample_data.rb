@@ -37,16 +37,24 @@ module LltTokenizerSampleData
       end
     end
 
-    def to_xml(arg)
+    def to_xml(arg, output = true)
+      # Indirection needed to capture benchmarks without recursion
+      recursive_xml(arg, output)
+    end
+
+    def recursive_xml(arg, output)
       if arg.kind_of?(Array)
-        arg.each { |e| to_xml(e) }
-        nil
+        arg.each { |e| recursive_xml(e, output) }
+        nil # don't return the arr
       else
         # Ox is only used for indentation...
-        doc = Ox.parse(arg.to_xml(recursive: true))
-        puts '-----------------'
-        puts arg
-        puts Ox.dump(doc, indent: 2).strip
+        xml = arg.to_xml(recursive: true)
+        if output
+          doc = Ox.parse(xml)
+          puts '-----------------'
+          puts arg
+          puts Ox.dump(doc, indent: 2).strip
+        end
       end
     end
 
@@ -59,6 +67,6 @@ module LltTokenizerSampleData
       end
     end
 
-    wrap_with_benchmark :segment, :tokenize
+    wrap_with_benchmark :to_xml #, :segment, :tokenize
   end
 end

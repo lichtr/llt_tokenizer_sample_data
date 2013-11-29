@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in llt_tokenizer_sample_data.gemspec
 gemspec
 
+gem 'ox'
 gem 'pg'
 gem 'llt-constants',       path: "../latin-language-toolkit/llt-constants"
 gem 'llt-core',            path: "../latin-language-toolkit/llt-core"

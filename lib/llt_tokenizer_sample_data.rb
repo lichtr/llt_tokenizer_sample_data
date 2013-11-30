@@ -58,13 +58,23 @@ module LltTokenizerSampleData
         tags = args[:tags].clone
         xml = arg.to_xml(tags, args.reject { |k, _| k == :tags })
         if output
-          xml = "<doc>#{xml}</doc>"
-          doc = Ox.parse(xml)
-          puts '-----------------'
-          puts arg
-          puts Ox.dump(doc, indent: 2).strip
+          if args[:inline]
+            puts xml
+          else
+            xml = "<doc>#{xml}</doc>"
+            doc = Ox.parse(xml)
+            puts '-----------------'
+            puts arg
+            puts Ox.dump(doc, indent: 2).strip
+          end
         end
       end
+    end
+
+    def xml_inject(arg, options = {})
+      sentences = segtok(arg)
+      xml = sentences.inject('') { |str, s| str << s.to_xml(options) }
+      puts Ox.dump(Ox.parse("<doc>#{xml}</doc>"), indent: 2)
     end
 
     def lookup(expr, sentences)

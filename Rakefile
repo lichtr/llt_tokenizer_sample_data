@@ -11,6 +11,10 @@ end
 desc 'Profile code'
 task :prof do
   ruby "script/prof.rb"
+  exec 'pprof.rb --gif profiling/segtok > profiling/segtok.gif;
+        pprof.rb --gif profiling/xml > profiling/xml.gif;
+        xdg-open profiling/segtok.gif;
+        xdg-open profiling/xml.gif'
 end
 
 task :default => :run

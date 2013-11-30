@@ -34,19 +34,21 @@ module LltTokenizerSampleData
       binding.pry
     end
 
-    def partok(sent)
-      t = Time.now
+    def partok(sentences)
       threads = []
-      sent.each_slice((sent.size / 4) - 1).each_with_index do |s, i|
+      slices = sentences.size / 4 - 1
+      sentences.each_slice(slices).each_with_index do |sliced, i|
         threads << Thread.new(i) do
           StemDatabase::Db.connection_pool.with_connection do
-            LLT::Tokenizer.new(@tokenizer.default_options).tokenize(s.to_s, add_to: s)
+            tok = LLT::Tokenizer.new(@tokenizer.default_options)
+            sliced.each do |sentence|
+              tok.tokenize(sentence.to_s, add_to: sentence)
+            end
           end
         end
       end
       threads.each(&:join)
-      puts Time.now - t
-      sent
+      sentences
     end
 
     def segtok(arg)
@@ -94,6 +96,6 @@ module LltTokenizerSampleData
       end
     end
 
-    wrap_with_benchmark :segtok #, :segment, :tokenize
+    wrap_with_benchmark :segtok, :partok #, :segment, :tokenize
   end
 end

@@ -37,13 +37,21 @@ module LltTokenizerSampleData
 
     def partok(sent)
       t = Time.now
-      x = Parallel.each(sent, in_threads: 4) do |s|
-        StemDatabase::Db.connection_pool.with_connection do
+      threads = []
+      sent.each_slice((sent.size / 4) - 1).each_with_index do |s, i|
+        puts i
+        threads << Thread.new(i) do
+          StemDatabase::Db.connection_pool.with_connection do
           LLT::Tokenizer.new(@tokenizer.default_options).tokenize(s.to_s, add_to: s)
+          end
         end
       end
+      threads.each(&:join)
+      #Parallel.each(sent, in_threads: 4) do |s|
+        #LLT::Tokenizer.new(@tokenizer.default_options).tokenize(s.to_s, add_to: s)
+      #end
       puts Time.now - t
-      x
+      sent
     end
 
     def segtok(arg)

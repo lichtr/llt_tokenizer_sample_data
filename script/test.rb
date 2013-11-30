@@ -9,9 +9,9 @@ def seg(count = 5, texts)
   count.times { @test.segtok(texts) }
 end
 
-def par(sentences)
+def par(count = 5, sentences)
   puts 'partok'
-  5.times { @test.partok(sentences) }
+  count.times { @test.partok(sentences) }
 end
 
 puts 'Warmup'

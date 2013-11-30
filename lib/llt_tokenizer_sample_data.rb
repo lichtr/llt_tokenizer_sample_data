@@ -3,7 +3,6 @@ require 'llt_tokenizer_sample_data/test_files'
 require 'llt/logger'
 require 'llt/segmenter'
 require 'llt/tokenizer'
-require 'parallel'
 
 require 'pry'
 require 'forwardable'
@@ -39,17 +38,13 @@ module LltTokenizerSampleData
       t = Time.now
       threads = []
       sent.each_slice((sent.size / 4) - 1).each_with_index do |s, i|
-        puts i
         threads << Thread.new(i) do
           StemDatabase::Db.connection_pool.with_connection do
-          LLT::Tokenizer.new(@tokenizer.default_options).tokenize(s.to_s, add_to: s)
+            LLT::Tokenizer.new(@tokenizer.default_options).tokenize(s.to_s, add_to: s)
           end
         end
       end
       threads.each(&:join)
-      #Parallel.each(sent, in_threads: 4) do |s|
-        #LLT::Tokenizer.new(@tokenizer.default_options).tokenize(s.to_s, add_to: s)
-      #end
       puts Time.now - t
       sent
     end

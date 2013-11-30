@@ -14,7 +14,6 @@ platform :jruby do
   gem 'activerecord-jdbcpostgresql-adapter'
 end
 
-gem 'parallel'
 gem 'llt-constants',       path: "../latin-language-toolkit/llt-constants"
 gem 'llt-core',            path: "../latin-language-toolkit/llt-core"
 gem 'llt-core_extensions', path: "../latin-language-toolkit/llt-core_extensions"

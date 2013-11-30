@@ -21,6 +21,8 @@ module LltTokenizerSampleData
     def_delegators :@segmenter, :segment
     def_delegators :@tokenizer, :tokenize
 
+    attr_reader :files, :tokenizer
+
     def initialize
       @files = TestFiles.new
       @segmenter = LLT::Segmenter.new
@@ -33,7 +35,7 @@ module LltTokenizerSampleData
       binding.pry
     end
 
-    def par_tok(sent)
+    def partok(sent)
       t = Time.now
       x = Parallel.each(sent, in_threads: 4) do |s|
         StemDatabase::Db.connection_pool.with_connection do

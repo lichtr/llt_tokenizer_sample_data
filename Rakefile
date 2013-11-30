@@ -8,4 +8,9 @@ task :run do
   ruby "script/run.rb"
 end
 
+desc 'Profile code'
+task :prof do
+  ruby "script/prof.rb"
+end
+
 task :default => :run

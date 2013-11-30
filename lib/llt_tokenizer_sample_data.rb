@@ -8,7 +8,10 @@ require 'parallel'
 require 'pry'
 require 'forwardable'
 require 'benchmark_wrapper'
-require 'ox' unless ENV['RUBY_VERSION'] =~ /jruby/
+
+unless RUBY_PLATFORM == 'java'
+  require 'ox'
+end
 
 module LltTokenizerSampleData
   class Test
@@ -71,10 +74,10 @@ module LltTokenizerSampleData
       end
     end
 
-    def xml_inject(arg, options = {})
+    def xml_inject(arg, no_ox = false, options = {})
       sentences = segtok(arg)
       xml = sentences.inject('') { |str, s| str << s.to_xml(options) }
-      puts Ox.dump(Ox.parse("<doc>#{xml}</doc>"), indent: 2)
+      puts Ox.dump(Ox.parse("<doc>#{xml}</doc>"), indent: 2) unless no_ox
     end
 
     def lookup(expr, sentences)

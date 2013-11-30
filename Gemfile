@@ -7,6 +7,7 @@ gemspec
 platform :ruby do
   gem 'pg'
   gem 'ox'
+  gem 'perftools.rb'
 end
 
 platform :jruby do

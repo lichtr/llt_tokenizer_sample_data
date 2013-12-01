@@ -40,7 +40,7 @@ module LltTokenizerSampleData
       sentences.each_slice(slices).each_with_index do |sliced, i|
         threads << Thread.new(i) do
           StemDatabase::Db.connection_pool.with_connection do
-            tok = LLT::Tokenizer.new(@tokenizer.default_options)
+            tok = @tokenizer.fork_instance
             sliced.each do |sentence|
               tok.tokenize(sentence.to_s, add_to: sentence)
             end
